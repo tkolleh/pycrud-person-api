@@ -2,6 +2,7 @@
 Service managing data for Person type
 """
 
+
 class Person:
     def __init__(
         self,
@@ -21,7 +22,10 @@ class Person:
         self.version: str = None
 
     def __eq__(self, other) -> bool:
-        pass
+        return (self.id == other.id and self.fname == other.fname
+                and self.mname == other.mname and self.lname == other.lname
+                and self.email == other.email and self.age == other.age
+                and self.version == other.version)
 
     def __str__(self):
         return "{cname}{{ \nmem_adr='{mem_adr}', \n{id}, \n{version}, \n{fname}, \n{mname}, \n{lname}, \n{email}, \n{age}, \n}}".format(

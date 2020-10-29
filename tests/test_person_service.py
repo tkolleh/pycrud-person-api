@@ -10,4 +10,10 @@ class TestPerson:
         assert 'Person{' in str(self.empty)
         assert 'mem_adr' in str(self.full) and self.full.id in str(self.full)
 
+    def test_dunder_eq(self):
+        assert self.empty != self.full
+        self.full_dupe = self.full
+        assert self.full_dupe == self.full
+
+
 
