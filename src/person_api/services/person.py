@@ -4,6 +4,23 @@ Service managing data for Person type
 
 
 class Person:
+    """
+    A class to represent a person.
+
+    Attributes
+    ----------
+    fname: str
+        first name of person
+    mname: str
+        middle name of person
+    lname: str
+        last name of person
+    email: str
+        email address of person
+    age: int
+        age of person
+    """
+
     def __init__(
         self,
         fname: str,
@@ -39,3 +56,5 @@ class Person:
             email=self.email,
             age=self.age,
         )
+
+

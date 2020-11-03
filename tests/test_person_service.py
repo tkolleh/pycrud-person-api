@@ -1,5 +1,5 @@
 import pytest
-from person_api.person_service import Person
+from person_api.services.person import Person
 
 class TestPerson:
     empty = Person('', '', '', '', None)

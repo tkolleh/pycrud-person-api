@@ -1,19 +1,16 @@
 import flask
 import json
-from flask import Flask
-from flask_cors import CORS
+
 from flask_restful import Resource, Api
-
-import api.person_service as service
-
-pycrud_person_app = Flask(__name__)
-api = Api(pycrud_person_app)
-CORS(pycrud_person_app)
+from person_api.services.person import Person
+from flask_cors import CORS
 
 class PersonResource(Resource):
     def get(self):
-        service.get(id)
+        service = Person()
 
-
-if __name__ == '__main__':
-    pycrud_person_app.run(debug=True, host='localhost', port=8181) 
+def create_controller(app):
+    CORS(app)
+    api = Api(app)
+    api.add_resource(PersonResource, '/person')
+    return api
