@@ -1,9 +1,9 @@
 """
 Database client module for interfacing with MongoDB.
 """
-from .models.person import Persons
 from flask_mongoengine import MongoEngine
-from bson.objectid import ObjectId
+
+from .models.person import Persons
 
 
 def init_db(app):
@@ -25,3 +25,7 @@ def fetch_persons(per_page=100, page=1, order_by: str = "lname"):
 def fetch_person(id: str):
     document = Persons.objects(id=id)
     return document
+
+
+def save_person(p: Persons):
+    p.save()

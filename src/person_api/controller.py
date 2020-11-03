@@ -1,7 +1,8 @@
 from flask import request
-from flask_restful import Resource, Api
-from person_api.services.person import get_persons, get_person
 from flask_cors import CORS
+from flask_restful import Resource, Api
+
+from person_api.services.person import get_persons
 
 
 class PersonResource(Resource):

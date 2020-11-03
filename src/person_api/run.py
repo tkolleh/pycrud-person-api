@@ -1,7 +1,9 @@
 import configparser
 from pathlib import Path
+
 from flask import Flask
 from flask_cors import CORS
+
 from person_api.controller import init_controller
 from person_api.db import init_db
 
