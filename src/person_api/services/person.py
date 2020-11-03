@@ -2,6 +2,8 @@
 Service managing data for Person type
 """
 from person_api.db import fetch_persons
+import json
+
 
 class Person:
     """
@@ -22,15 +24,18 @@ class Person:
     """
 
     def __init__(
-        self, fname: str, mname: str, lname: str, email: str, age: int, _id = None,
+        self, fname: str, mname: str, lname: str, email: str, age: int, _id=None,
     ):
-        self.id: str = _id if type(_id) == 'str' else str(_id)
+        self.id: str = _id if type(_id) == "str" else str(_id)
         self.fname: str = fname
         self.mname: str = mname
         self.lname: str = lname
         self.email: str = email
         self.age: int = age
         self.version: str = None
+
+    def to_json(self):
+        return json.dumps(self, default=lambda o: o.__dict__)
 
     def __eq__(self, other) -> bool:
         return (
@@ -44,24 +49,26 @@ class Person:
         )
 
     def __str__(self):
-        return "{cname}{{ \nmem_adr='{mem_adr}', " \
-               "\n{id}, " \
-               "\n{version}, " \
-               "\n{fname}, " \
-               "\n{mname}, " \
-               "\n{lname}, " \
-               "\n{email}, " \
-               "\n{age}, " \
-               "\n}}".format(
-            cname=self.__class__.__name__,
-            mem_adr=id(self),
-            id=self.id,
-            version=self.version,
-            fname=self.fname,
-            mname=self.mname,
-            lname=self.lname,
-            email=self.email,
-            age=self.age,
+        return (
+            "{cname}{{ \nmem_adr='{mem_adr}', "
+            "\n{id}, "
+            "\n{version}, "
+            "\n{fname}, "
+            "\n{mname}, "
+            "\n{lname}, "
+            "\n{email}, "
+            "\n{age}, "
+            "\n}}".format(
+                cname=self.__class__.__name__,
+                mem_adr=id(self),
+                id=self.id,
+                version=self.version,
+                fname=self.fname,
+                mname=self.mname,
+                lname=self.lname,
+                email=self.email,
+                age=self.age,
+            )
         )
 
 
@@ -69,4 +76,3 @@ def get_persons():
     persons = (fetch_persons())[0]
     rtn = [Person(**p) for p in persons]
     return rtn
-

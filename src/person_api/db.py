@@ -5,6 +5,7 @@ from flask import current_app, g
 from werkzeug.local import LocalProxy
 from pymongo import MongoClient, DESCENDING, ASCENDING
 
+
 def get_db():
     """
     Configuration method to return a db instance
@@ -21,10 +22,11 @@ def get_db():
         )[DB_NAME]
     return db
 
-_DB = LocalProxy(get_db) # Use LocalProxy to read the global database object
+
+_DB = LocalProxy(get_db)  # Use LocalProxy to read the global database object
 
 
-def fetch_persons(per_page=100, sort_by='lname', last_id=None):
+def fetch_persons(per_page=100, sort_by="lname", last_id=None):
     if last_id:
         cursor = _DB["persons"].find({"_id": {"$gt": last_id}}).sort(sort_by, ASCENDING)
     else:
