@@ -1,7 +1,7 @@
 """
 Service managing data for Person type
 """
-
+from person_api.db import fetch_persons
 
 class Person:
     """
@@ -22,15 +22,9 @@ class Person:
     """
 
     def __init__(
-        self,
-        fname: str,
-        mname: str,
-        lname: str,
-        email: str,
-        age: int,
-        id: str = None,
+        self, fname: str, mname: str, lname: str, email: str, age: int, _id = None,
     ):
-        self.id: str = id
+        self.id: str = _id if type(_id) == 'str' else str(_id)
         self.fname: str = fname
         self.mname: str = mname
         self.lname: str = lname
@@ -39,13 +33,26 @@ class Person:
         self.version: str = None
 
     def __eq__(self, other) -> bool:
-        return (self.id == other.id and self.fname == other.fname
-                and self.mname == other.mname and self.lname == other.lname
-                and self.email == other.email and self.age == other.age
-                and self.version == other.version)
+        return (
+            self.id == other.id
+            and self.fname == other.fname
+            and self.mname == other.mname
+            and self.lname == other.lname
+            and self.email == other.email
+            and self.age == other.age
+            and self.version == other.version
+        )
 
     def __str__(self):
-        return "{cname}{{ \nmem_adr='{mem_adr}', \n{id}, \n{version}, \n{fname}, \n{mname}, \n{lname}, \n{email}, \n{age}, \n}}".format(
+        return "{cname}{{ \nmem_adr='{mem_adr}', " \
+               "\n{id}, " \
+               "\n{version}, " \
+               "\n{fname}, " \
+               "\n{mname}, " \
+               "\n{lname}, " \
+               "\n{email}, " \
+               "\n{age}, " \
+               "\n}}".format(
             cname=self.__class__.__name__,
             mem_adr=id(self),
             id=self.id,
@@ -57,4 +64,9 @@ class Person:
             age=self.age,
         )
 
+
+def get_persons():
+    persons = (fetch_persons())[0]
+    rtn = [Person(**p) for p in persons]
+    return rtn
 

@@ -9,7 +9,6 @@ config.read(Path.cwd().resolve().joinpath("config.ini"))
 
 
 def init_app():
-
     app = Flask(__name__)
     ctx = app.app_context()
     ctx.push()
@@ -24,8 +23,7 @@ def init_app():
     return app
 
 if __name__ == "__main__":
-    pycrud_person_app = init_app(pycrud_person_app)
-
+    pycrud_person_app = init_app()
     controller = create_controller(pycrud_person_app)
     controller.run()
 

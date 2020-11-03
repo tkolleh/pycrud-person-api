@@ -2,12 +2,12 @@ import flask
 import json
 
 from flask_restful import Resource, Api
-from person_api.services.person import Person
+from person_api.services.person import get_persons
 from flask_cors import CORS
 
 class PersonResource(Resource):
     def get(self):
-        service = Person()
+        return get_persons()
 
 def create_controller(app):
     CORS(app)

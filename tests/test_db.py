@@ -1,5 +1,4 @@
 import pytest
-from pymongo import MongoClient
 from person_api.db import fetch_persons
 
 def test_fetch_persons(client):

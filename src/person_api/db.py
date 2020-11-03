@@ -23,7 +23,8 @@ def get_db():
 
 _DB = LocalProxy(get_db) # Use LocalProxy to read the global database object
 
-def fetch_persons(per_page, sort_by, last_id=None):
+
+def fetch_persons(per_page=100, sort_by='lname', last_id=None):
     if last_id:
         cursor = _DB["persons"].find({"_id": {"$gt": last_id}}).sort(sort_by, ASCENDING)
     else:
