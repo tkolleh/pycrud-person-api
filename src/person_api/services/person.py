@@ -1,8 +1,14 @@
 """
 Service managing data for Person type
 """
+from person_api.db import (
+    fetch_persons,
+    fetch_person,
+    save_person,
+    set_person_fields,
+    delete_person,
+)
 from person_api.models.person import Persons
-from person_api.db import fetch_persons, fetch_person, save_person, set_person_fields
 
 
 def get_persons():
@@ -25,3 +31,8 @@ def new_person(fname: str, lname: str, mname: str, email: str, age: int):
 def update_person_by_id(id: str, **kwargs):
     person = get_person(id)
     set_person_fields(person, **kwargs)
+
+
+def remove_person_by_id(id: str):
+    person = get_person(id)
+    delete_person(person)

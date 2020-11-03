@@ -33,3 +33,7 @@ def save_person(p: Persons):
 
 def set_person_fields(p, **kwargs):
     Persons.objects(id=p.id).update_one(**kwargs)
+
+
+def delete_person(p):
+    p.delete()
