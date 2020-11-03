@@ -1,5 +1,10 @@
 import pytest
-from person_api.services.person import get_persons, get_person, new_person
+from person_api.services.person import (
+    get_persons,
+    get_person,
+    new_person,
+    update_person_by_id,
+)
 from person_api.models.person import Persons
 
 
@@ -26,14 +31,31 @@ def test_get_persons(client):
 
 
 def test_get_person(client):
-    person = get_person('5f9c432f06f8bb3f8eba2e4d')
+    person = get_person("5f9c432f06f8bb3f8eba2e4d")
     assert person is not None
-    assert person.lname == 'Aspel'
+    assert person.lname == "Aspel"
 
 
 def test_new_person(client):
     jane_doe = new_person(
-        fname = "Jane", mname="", lname = "Doe", email = "jd@missing.com", age = 33
+        fname="Jane", mname="", lname="Doe", email="jd@missing.com", age=33
     )
     assert jane_doe is not None
-    assert jane_doe.fname == 'Jane'
+    assert jane_doe.fname == "Jane"
+
+    jane_doe.delete()
+
+
+def test_update_person_by_id(client):
+    jane_doe = new_person(
+        fname="Jane", mname="", lname="Doe", email="jd@missing.com", age=33
+    )
+    assert jane_doe is not None
+    assert jane_doe.fname == "Jane"
+
+    new_email = "jd@found.com"
+    update_person_by_id(jane_doe.id, email=new_email)
+    jane_doe = get_person(jane_doe.id)
+    assert jane_doe.email == new_email
+
+    jane_doe.delete()

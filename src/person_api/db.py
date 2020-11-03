@@ -29,3 +29,7 @@ def fetch_person(id: str):
 
 def save_person(p: Persons):
     p.save()
+
+
+def set_person_fields(p, **kwargs):
+    Persons.objects(id=p.id).update_one(**kwargs)
