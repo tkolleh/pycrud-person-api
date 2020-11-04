@@ -1,15 +1,15 @@
----
-title: Python CRUD on Person Project Notes
-date: 2020-10-28
-author: tkolleh
-pandocomatic_:
-  use-template: marked
-  pandoc:
-    self-contained: true
-tags:
-  - project
-  - interview
----
+<!-- --- -->
+<!-- title: Python CRUD on Person Project Notes -->
+<!-- date: 2020-10-28 -->
+<!-- author: tkolleh -->
+<!-- pandocomatic_: -->
+<!--   use-template: marked -->
+<!--   pandoc: -->
+<!--     self-contained: true -->
+<!-- tags: -->
+<!--   - project -->
+<!--   - interview -->
+<!-- --- -->
 
 # Python CRUD on Person Project Notes
 
