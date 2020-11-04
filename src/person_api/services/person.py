@@ -8,7 +8,7 @@ from person_api.db import (
     set_person_fields,
     delete_person,
 )
-from person_api.models.person import Persons
+from person_api.models.persons import Persons
 
 
 def get_persons():

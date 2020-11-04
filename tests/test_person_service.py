@@ -5,7 +5,7 @@ from person_api.services.person import (
     new_person,
     update_person_by_id,
 )
-from person_api.models.person import Persons
+from person_api.models.persons import Persons
 
 
 class TestPersons:

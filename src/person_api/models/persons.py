@@ -28,6 +28,7 @@ class Persons(_DB.Document):
     lname: str = _DB.StringField()
     email: str = _DB.StringField()
     age: int = _DB.IntField()
+    revision: int = _DB.IntField()
 
     def to_json(self):
         return json.dumps(self, default=lambda o: o.__dict__)
@@ -39,6 +40,48 @@ class Persons(_DB.Document):
             and self.lname == other.lname
             and self.email == other.email
             and self.age == other.age
+            and self.revision == other.revision
+        )
+
+    def __str__(self):
+        return (
+            "{cname}{{ \nmem_adr='{mem_adr}', "
+            "\n{id}, "
+            "\njson_str:'{obj_str}' "
+            "\n}}".format(
+                cname=self.__class__.__name__,
+                mem_adr=id(self),
+                id=self.id,
+                obj_str=self.to_json(),
+            )
+        )
+
+
+class PersonRevisions(_DB.Document):
+    """
+    A class to representing historical changes to person.
+    """
+
+    fname: str = _DB.StringField()
+    mname: str = _DB.StringField()
+    lname: str = _DB.StringField()
+    email: str = _DB.StringField()
+    age: int = _DB.IntField()
+    revision: int = _DB.IntField()
+    origin_id: str = _DB.StringField()
+
+    def to_json(self):
+        return json.dumps(self, default=lambda o: o.__dict__)
+
+    def __eq__(self, other) -> bool:
+        return (
+            self.fname == other.fname
+            and self.mname == other.mname
+            and self.lname == other.lname
+            and self.email == other.email
+            and self.age == other.age
+            and self.revision == other.revision
+            and self.origin_id == other.origin_id
         )
 
     def __str__(self):

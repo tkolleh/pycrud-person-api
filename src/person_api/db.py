@@ -3,7 +3,7 @@ Database client module for interfacing with MongoDB.
 """
 from flask_mongoengine import MongoEngine
 
-from .models.person import Persons
+from .models.persons import Persons, PersonRevisions
 
 
 def init_db(app):
@@ -31,8 +31,26 @@ def save_person(p: Persons):
     p.save()
 
 
+def save_person_revisions(pr: PersonRevisions):
+    pr.save()
+
+
 def set_person_fields(p, **kwargs):
-    Persons.objects(id=p.id).update_one(**kwargs)
+    curr_person = fetch_person(p.id)[0]
+    revision = 1 if curr_person.revision is None else curr_person.revision
+    revised_person = PersonRevisions(
+        age=curr_person.age,
+        email=curr_person.email,
+        fname=curr_person.fname,
+        origin_id=str(curr_person.id),
+        lname=curr_person.lname,
+        mname=curr_person.mname,
+        revision=revision,
+    )
+    save_person_revisions(revised_person)
+    new_args = kwargs
+    new_args["revision"] = revision + 1
+    Persons.objects(id=p.id).update_one(**new_args)
 
 
 def delete_person(p):
