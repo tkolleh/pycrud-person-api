@@ -21,7 +21,7 @@ def get_person(id: str):
     return fetch_person(id)[0]
 
 
-def get_person_revision(id:str, revision:int):
+def get_person_revision(id: str, revision: int):
     return fetch_person_revision(id, revision)[0]
 
 
