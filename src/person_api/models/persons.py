@@ -30,8 +30,8 @@ class Persons(_DB.Document):
     age: int = _DB.IntField()
     revision: int = _DB.IntField()
 
-    def to_json(self):
-        return json.dumps(self, default=lambda o: o.__dict__)
+    # def to_json(self):
+    #     return json.dumps(self, default=lambda o: o.__dict__)
 
     def __eq__(self, other) -> bool:
         return (
@@ -70,8 +70,8 @@ class PersonRevisions(_DB.Document):
     revision: int = _DB.IntField()
     origin_id: str = _DB.StringField()
 
-    def to_json(self):
-        return json.dumps(self, default=lambda o: o.__dict__)
+    # def to_json(self):
+    #     return json.dumps(self, default=lambda o: o.__dict__)
 
     def __eq__(self, other) -> bool:
         return (

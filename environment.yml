@@ -1,0 +1,22 @@
+name: pycrud-person
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - flask-restful
+  - conda-devenv
+  - mypy
+  - flask
+  - flake8
+  - python=3.7
+  - debugpy
+  - pip
+  - gunicorn
+  - flask_cors
+  - pytest
+  - pymongo
+  - dnspython
+  - mongoengine
+  - py
+  - pluggy
+prefix: /usr/local/anaconda3/envs/pycrud-person

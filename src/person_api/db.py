@@ -27,6 +27,11 @@ def fetch_person(id: str):
     return document
 
 
+def fetch_person_revision(id: str, revision: int):
+    document = PersonRevisions.objects(origin_id=id, revision=revision)
+    return document
+
+
 def save_person(p: Persons):
     p.save()
 

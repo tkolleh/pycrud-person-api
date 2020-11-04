@@ -4,6 +4,7 @@ from person_api.services.person import (
     get_person,
     new_person,
     update_person_by_id,
+    get_person_revision,
 )
 from person_api.models.persons import Persons
 
@@ -59,3 +60,9 @@ def test_update_person_by_id(client):
     assert jane_doe.email == new_email
 
     jane_doe.delete()
+
+
+def test_get_person_revision(client):
+    person = get_person_revision('5fa21b1e9fe7cf62f3389b40', 1)
+    assert person is not None
+    assert person.origin_id == '5fa21b1e9fe7cf62f3389b40'

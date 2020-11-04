@@ -5,6 +5,7 @@ from person_api.db import (
     fetch_persons,
     fetch_person,
     save_person,
+    fetch_person_revision,
     set_person_fields,
     delete_person,
 )
@@ -18,6 +19,10 @@ def get_persons():
 
 def get_person(id: str):
     return fetch_person(id)[0]
+
+
+def get_person_revision(id:str, revision:int):
+    return fetch_person_revision(id, revision)[0]
 
 
 def new_person(fname: str, lname: str, mname: str, email: str, age: int):
