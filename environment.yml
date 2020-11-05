@@ -5,12 +5,21 @@ channels:
 dependencies:
   - flask-restful
   - conda-devenv
+  - ipython
+  - black
   - mypy
+  - yapf
   - flask
   - flake8
   - python=3.7
-  - debugpy
   - pip
+  - debugpy
+  - pip:
+    - flask-mongoengine
+    - flask-wtf
+    - pytest
+    - pytest-pythonpath
+    - wtforms
   - gunicorn
   - flask_cors
   - pytest
@@ -20,3 +29,7 @@ dependencies:
   - py
   - pluggy
 prefix: /usr/local/anaconda3/envs/pycrud-person
+
+# This file is manually created by merging `conda env exports --from-history`
+# and the normal conda export. The environment name must remain the first
+# line of the file.

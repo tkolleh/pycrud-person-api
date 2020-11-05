@@ -11,7 +11,21 @@
 <!--   - interview -->
 <!-- --- -->
 
-# Python CRUD on Person Project Notes
+# CRUD on person project, Python edition
+
+ CRUD on person projects are a series of simple API applications for the exploration of different languages, frameworks and libraries.
+
+# Build from source
+
+Place a configuration file (*config.ini*) in the project root directory. The same directory as the *Dockerfile*, *setup.sh*, and *build-image.sh* files. Ensure that the bash scripts are executable by running `chmod u+x <script name>`.
+
+Run the *build-image.sh* file to build.
+
+# Run the application
+
+Ensure docker is installed and running. Execute the *setup.sh* file to start a docker container as an executable with the application.
+
+# Design
 
 ## MongoDB design
 
