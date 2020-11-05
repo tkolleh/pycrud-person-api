@@ -1,7 +1,7 @@
 import configparser
 from pathlib import Path
 
-from flask import Flask
+from flask import Flask, current_app
 from flask_cors import CORS
 
 from person_api.controller import init_controller
@@ -31,4 +31,6 @@ if __name__ == "__main__":
     pycrud_person_app = init_app()
     init_db(pycrud_person_app)
     CORS(pycrud_person_app)
-    init_controller(pycrud_person_app).run()
+    init_controller(pycrud_person_app).run(
+        port=current_app.config["PORT"]
+    )
