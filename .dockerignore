@@ -1,0 +1,12 @@
+Session.vim
+.editorconfig
+.git*
+.idea
+.pytest*
+*.md
+*pycache*
+*/*pycache*
+*data.json
+tags
+tests
+pytest.ini
