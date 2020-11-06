@@ -1,6 +1,7 @@
 #!/bin/bash
+set -euo pipefail
 
-if [ -n "${1}" ]; then
+if [ -n "${1-}" ]; then
   docker run -d "${1}"
 else 
   TAG_ROOT="tkolleh"

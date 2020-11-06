@@ -14,11 +14,6 @@ dependencies:
   - python=3.7
   - pip
   - debugpy
-  - pip:
-    - flask-mongoengine
-    - flask-wtf
-    - pytest-pythonpath
-    - wtforms
   - gunicorn
   - flask_cors
   - pytest
@@ -27,6 +22,10 @@ dependencies:
   - mongoengine
   - py
   - pluggy
+  - pip:
+    - flask-mongoengine
+    - flask-wtf
+    - wtforms
 prefix: /usr/local/anaconda3/envs/pycrud-person
 
 # This file is manually created by merging `conda env exports --from-history`

@@ -1,19 +1,28 @@
-FROM continuumio/miniconda3:latest
+FROM continuumio/miniconda3:latest AS build
 
 LABEL maintainer="tkolleh <http://kolleh.com>"
 
-COPY ./src /app/src
-COPY ./config.ini /app/config.ini
 COPY ./environment.yml /tmp/environment.yml
 
+ARG CONDA_ENVNAME=pycrud-person
+
 RUN conda env create --file /tmp/environment.yml
-# RUN . /opt/conda/etc/profile.d/conda.sh && conda activate
+RUN conda install -c conda-forge conda-pack
+RUN conda-pack -n $CONDA_ENVNAME -o /tmp/env.tar \ 
+  && mkdir /venv \
+  && cd /venv \
+  && tar xf /tmp/env.tar \
+  && rm /tmp/env.tar
 
-# ENV CONDA_ENVNAME="$(head -1 /tmp/environment.yml | cut -d':' -f2)"
+RUN /venv/bin/conda-unpack
 
-# RUN echo "conda activate $CONDA_ENVNAME" > ~/.bashrc
+# Use Debian as the runtime-stage image. Everything else we need is apart of
+# the pre-built conda env
+FROM debian:buster AS runtime
 
-# ENV PATH /opt/conda/envs/$CONDA_ENVNAME/bin:$PATH
+COPY --from=build /venv /venv
+COPY ./src /app/src
+COPY ./config.ini /app/config.ini
 
 ENV PYTHONPATH "/app:/app/src"
 
@@ -21,5 +30,6 @@ EXPOSE 8181/tcp
 
 WORKDIR /app
 
-ENTRYPOINT ["conda", "run", "-n", "pycrud-person", "python", "src/person_api/run.py"]
-# CMD [ "src/person_api/run.py" ]
+SHELL ["/bin/bash", "-c"]
+ENTRYPOINT source /venv/bin/activate \
+  && python src/person_api/run.py
