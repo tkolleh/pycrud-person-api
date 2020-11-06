@@ -12,7 +12,7 @@ else
   echo "Using default application port"
   echo "======================================"
 
-  docker run -d -p 8181:8181 $IMAGE
+  docker run -d $IMAGE
   sleep 3s
   echo ""
   docker ps

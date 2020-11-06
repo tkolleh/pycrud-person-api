@@ -17,7 +17,6 @@ dependencies:
   - pip:
     - flask-mongoengine
     - flask-wtf
-    - pytest
     - pytest-pythonpath
     - wtforms
   - gunicorn
