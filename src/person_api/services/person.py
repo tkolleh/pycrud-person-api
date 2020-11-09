@@ -28,7 +28,6 @@ def get_person_revision(id: str, revision: int):
 def new_person(fname: str, lname: str, mname: str, email: str, age: int):
     p = Persons(fname=fname, lname=lname, mname=mname, email=email, age=age)
     save_person(p)
-
     rslt = Persons.objects(fname=fname, lname=lname, email=email, age=age)
     return rslt[0]
 

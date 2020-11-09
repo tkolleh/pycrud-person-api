@@ -55,7 +55,11 @@ def set_person_fields(p, **kwargs):
     save_person_revisions(revised_person)
     new_args = kwargs
     new_args["revision"] = revision + 1
-    Persons.objects(id=p.id).update_one(**new_args)
+    rslt = Persons.objects(id=p.id).update_one(full_result=True, **new_args)
+    # TODO: Add custom exception if error or update is not acknowledged
+    if rslt.acknowledged:
+        return fetch_person(p.id)
+    return None
 
 
 def delete_person(p):
