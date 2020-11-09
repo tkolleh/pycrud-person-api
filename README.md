@@ -27,15 +27,7 @@ Ensure docker is installed and running. Execute the *setup.sh* file to start a d
 
 # Design
 
-## MongoDB design
-
-```{.plantuml caption="MongoDB Documents"}
-@startuml
-Person o-- PersonCollection
-@enduml
-```
-
 ## MongoDB document versioning pattern
 
-This pattern can handle larger number of documents with infrequent revisions, and the majority of searches (GETs) are for the current document version.
+This pattern can handle larger number of documents with infrequent revisions, and the majority of searches (GETs) are for the current document version. The `persons` collection contains current document versions. Changes to the current document trigger the creation of a revision. Saved in the `person_revisions` collection.
 
