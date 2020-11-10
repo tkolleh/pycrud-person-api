@@ -42,7 +42,12 @@ def save_person_revisions(pr: PersonRevisions):
 
 def set_person_fields(p, **kwargs):
     curr_person = fetch_person(p.id)[0]
-    revision = 1 if curr_person.revision is None else curr_person.revision
+    revision = 0
+    if curr_person.revision is not None:
+        revision = curr_person.revision
+    else:
+        revision = 1
+
     revised_person = PersonRevisions(
         age=curr_person.age,
         email=curr_person.email,
@@ -53,9 +58,11 @@ def set_person_fields(p, **kwargs):
         revision=revision,
     )
     save_person_revisions(revised_person)
+
     new_args = kwargs
     new_args["revision"] = revision + 1
     rslt = Persons.objects(id=p.id).update_one(full_result=True, **new_args)
+
     # TODO: Add custom exception if error or update is not acknowledged
     if rslt.acknowledged:
         return fetch_person(p.id)

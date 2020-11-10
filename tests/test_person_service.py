@@ -53,11 +53,13 @@ def test_update_person_by_id(client):
     )
     assert jane_doe is not None
     assert jane_doe.fname == "Jane"
+    assert jane_doe.revision is None
 
     new_email = "jd@found.com"
     jane_doe = update_person_by_id(jane_doe.id, email=new_email)
     assert jane_doe is not None
     assert jane_doe.email == new_email
+    assert jane_doe.revision >= 1
 
     jane_doe.delete()
 

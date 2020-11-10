@@ -1,5 +1,3 @@
-import json
-
 from flask_mongoengine import MongoEngine
 
 _DB = MongoEngine()

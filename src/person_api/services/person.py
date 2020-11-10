@@ -34,7 +34,7 @@ def new_person(fname: str, lname: str, mname: str, email: str, age: int):
 
 def update_person_by_id(id: str, **kwargs):
     person = get_person(id)
-    set_person_fields(person, **kwargs)
+    return set_person_fields(person, **kwargs)[0]
 
 
 def remove_person_by_id(id: str):
