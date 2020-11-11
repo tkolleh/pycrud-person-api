@@ -29,15 +29,11 @@ def init_app():
 
 
 def create_app():
-    pycrud_person_app = init_app()
-    init_db(pycrud_person_app)
-    CORS(pycrud_person_app)
-    init_controller(pycrud_person_app).run(
-        debug=current_app.config["DEBUG"],
-        host=current_app.config["HOST"],
-        port=current_app.config["PORT"],
-    )
-    return pycrud_person_app
+    app = init_app()
+    init_db(app)
+    CORS(app)
+    app = init_controller(app)
+    return app
 
 
 if __name__ == "__main__":
