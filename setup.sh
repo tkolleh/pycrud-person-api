@@ -2,7 +2,7 @@
 set -euo pipefail
 
 if [ -n "${1-}" ]; then
-  docker run -d "${1}"
+  docker run -d -p 8181:8181 "${1}"
 else 
   TAG_ROOT="tkolleh"
   APPNAME="pycrud-person-api"
@@ -10,7 +10,7 @@ else
 
   echo "======================================"
   echo "Setup & run application"
-  echo "Using default application port"
+  echo ""
   echo "======================================"
 
   docker run -d $IMAGE

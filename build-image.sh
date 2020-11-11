@@ -6,8 +6,10 @@ NAME_ROOT="tkolleh"
 NAME="${NAME_ROOT}/pycrud-person-api"
 
 echo -e "\nPull the latest version of the image to populate the build cache"
+echo -e "\n****WARNING! comment out pull commands if there are docker registry errors****\n"
 docker pull ${NAME}:build-stage || true
 docker pull ${NAME}:latest || true
+echo -e "\n****WARNING! comment out pull commands if there are docker registry errors****\n"
 
 echo -e "\nBuild build-stage image..."
 docker build --target build \

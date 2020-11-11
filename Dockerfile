@@ -26,10 +26,13 @@ COPY ./config.ini /app/config.ini
 
 ENV PYTHONPATH "/app:/app/src"
 
-EXPOSE 8181/tcp
-
 WORKDIR /app
+
+ENV FLASK_ENV "development"
+ENV FLASK_APP "person_api.run"
+
+EXPOSE 8181/tcp
 
 SHELL ["/bin/bash", "-c"]
 ENTRYPOINT source /venv/bin/activate \
-  && python src/person_api/run.py
+  && flask run --host 0.0.0.0 --port 8181

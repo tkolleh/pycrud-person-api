@@ -18,7 +18,11 @@ def get_persons():
 
 
 def get_person(id: str):
-    return fetch_person(id)[0]
+    try:
+        person = fetch_person(id)[0]
+    except Exception:
+        return None
+    return person
 
 
 def get_person_revision(id: str, revision: int):

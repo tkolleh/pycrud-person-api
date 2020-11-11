@@ -25,4 +25,4 @@ def test_fetch_persons(client):
     count_per_page = 10
     rslt = fetch_persons(count_per_page)
     assert rslt.per_page == 10
-    assert rslt.items[0]["lname"] == "Ales0"
+    assert rslt.items[0]["lname"] == "Arnald"
