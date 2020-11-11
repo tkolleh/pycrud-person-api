@@ -7,11 +7,12 @@ from flask_cors import CORS
 from person_api.controller import init_controller
 from person_api.db import init_db
 
-config = configparser.ConfigParser()
-config.read(Path.cwd().resolve().joinpath("config.ini"))
-
 
 def init_app():
+    config = configparser.ConfigParser()
+    config.read(Path.cwd().resolve().joinpath("config.ini"))
+    print("TRACE: Current config sections include: \n{}".format(config.sections()))
+
     app = Flask(__name__)
     ctx = app.app_context()
     ctx.push()
@@ -27,8 +28,24 @@ def init_app():
     return app
 
 
+def create_app():
+    pycrud_person_app = init_app()
+    init_db(pycrud_person_app)
+    CORS(pycrud_person_app)
+    init_controller(pycrud_person_app).run(
+        debug=current_app.config["DEBUG"],
+        host=current_app.config["HOST"],
+        port=current_app.config["PORT"],
+    )
+    return pycrud_person_app
+
+
 if __name__ == "__main__":
     pycrud_person_app = init_app()
     init_db(pycrud_person_app)
     CORS(pycrud_person_app)
-    init_controller(pycrud_person_app).run(port=current_app.config["PORT"])
+    init_controller(pycrud_person_app).run(
+        debug=current_app.config["DEBUG"],
+        host=current_app.config["HOST"],
+        port=current_app.config["PORT"],
+    )
